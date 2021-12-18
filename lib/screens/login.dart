@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttera/screens/home.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -11,6 +12,9 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     var _formKey = GlobalKey<FormState>();
+
+    String _username;
+    String _password;
 
     return Material(
       child: SafeArea(
@@ -55,7 +59,7 @@ class _LoginState extends State<Login> {
                           labelText: "Enter your Username"),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
+                          return "Username can't be empty";
                         }
                         return null;
                       },
@@ -69,7 +73,7 @@ class _LoginState extends State<Login> {
                           labelText: "Enter your Password"),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
+                          return "Password can't be empty";
                         }
                         return null;
                       },
@@ -84,9 +88,10 @@ class _LoginState extends State<Login> {
                           backgroundColor: Colors.blueAccent),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processing Data')),
-                          );
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Home()));
                         }
                       },
                       child: const Text(
